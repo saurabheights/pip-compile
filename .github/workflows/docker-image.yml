@@ -12,16 +12,17 @@ jobs:
   build-and-push:
     runs-on: ubuntu-latest
 
+    # https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/using-a-matrix-for-your-jobs#about-matrix-strategies
     strategy:
       matrix:
         python-version: ['3.8', '3.9', '3.10', '3.11', '3.12']
-        include:
-        - tag: alpine
-          directory: alpine
-        - tag: bullseye
-          directory: debian
-        - tag: bookworm
-          directory: debian
+        dist-image:
+          - tag: alpine
+            directory: alpine
+          - tag: bullseye
+            directory: debian
+          - tag: bookworm
+            directory: debian
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -42,9 +43,9 @@ jobs:
     - name: Build pip-compile images and push to docker
       uses: docker/build-push-action@v6
       with:
-        tags: saurabheights/pip-compile:${{ matrix.python-version }}-${{ matrix.tag }}
-        context: ./${{ matrix.directory }}
-        build-args: TAG=${{ matrix.python-version }}-${{ matrix.tag }}
+        tags: saurabheights/pip-compile:${{ matrix.python-version }}-${{ matrix.dist-image.tag }}
+        context: ./${{ matrix.dist-image.directory }}
+        build-args: TAG=${{ matrix.python-version }}-${{ matrix.dist-image.tag }}
         labels: org.opencontainers.image.authors=khandujasaurabh@gmail.com,org.opencontainers.image.vendor=Saurabh Khanduja,org.opencontainers.image.licenses=Apache-2.0
         push: True
 
