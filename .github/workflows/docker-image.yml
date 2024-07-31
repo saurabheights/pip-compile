@@ -14,12 +14,14 @@ jobs:
 
     strategy:
       matrix:
-        python-version: [3.8]  # , 3.9, 3.10, 3.11, 3.12
+        python-version: [3.8, 3.9, 3.10, 3.11, 3.12]
         include:
         - tag: alpine
           directory: alpine
-#        - tag: slim-buster
-#          directory: debian
+        - tag: bullseye
+          directory: debian
+        - tag: bookworm
+          directory: debian
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
