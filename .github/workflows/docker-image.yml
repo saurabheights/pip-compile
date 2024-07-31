@@ -42,9 +42,7 @@ jobs:
       with:
         tags: saurabheights/pip-compile:${{ matrix.python-version }}-${{ matrix.tag }}
         context: ./${{ matrix.directory }}
-        build_args: TAG=${{ matrix.python-version }}-${{ matrix.tag }}
+        build-args: TAG=${{ matrix.python-version }}-${{ matrix.tag }}
         labels: org.opencontainers.image.authors=khandujasaurabh@gmail.com,org.opencontainers.image.vendor=Saurabh Khanduja,org.opencontainers.image.licenses=Apache-2.0
         push: True
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
 
