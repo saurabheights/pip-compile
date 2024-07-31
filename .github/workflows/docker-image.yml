@@ -1,39 +1,50 @@
-name: Docker Image CI
+name: Docker Image CI - build and push pip-compile images for various python versions.
 
 on:
   push:
     branches:
-    - stable
+      - main
   schedule:
   - cron: '0 12 15 * *'
 
 jobs:
-  build:
+  # Build for 3.8 to 3.12. https://devguide.python.org/versions/
+  build-and-push:
     runs-on: ubuntu-latest
+
     strategy:
       matrix:
+        python-version: [3.8]  # , 3.9, 3.10, 3.11, 3.12
         include:
-        - tag: 3.8-alpine3.12
+        - tag: alpine
           directory: alpine
-        - tag: 3.8-slim-buster
-          directory: debian
+#        - tag: slim-buster
+#          directory: debian
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
     - name: Set date
       id: date
       run: echo "::set-output name=date::$(date --iso-8601=date)"
-    - uses: docker/build-push-action@v1
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v3
       with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-        repository: midnighter/pip-compile
-        tags: ${{ matrix.tag }},${{ matrix.tag }}_${{ steps.date.outputs.date }}
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Build pip-compile images and push to docker
+      uses: docker/build-push-action@v6
+      with:
+        tags: saurabheights/pip-compile:${{ matrix.tag }}_${{ matrix.python-version }}
         path: ${{ matrix.directory }}
-        build_args: TAG=${{ matrix.tag }}
-        labels: org.opencontainers.image.authors=midnighter@posteo.net,org.opencontainers.image.vendor=Moritz E. Beber,org.opencontainers.image.licenses=Apache-2.0
-        add_git_labels: true
-    - uses: peter-evans/dockerhub-description@v2
-      env:
-        DOCKERHUB_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        DOCKERHUB_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        DOCKERHUB_REPOSITORY: midnighter/pip-compile
+        build_args: TAG=${{ matrix.python-version }}-${{ matrix.tag }}
+        labels: org.opencontainers.image.authors=khandujasaurabh@gmail.com,org.opencontainers.image.vendor=Saurabh Khanduja,org.opencontainers.image.licenses=Apache-2.0
+        push: True
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
