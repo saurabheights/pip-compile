@@ -40,8 +40,8 @@ jobs:
     - name: Build pip-compile images and push to docker
       uses: docker/build-push-action@v6
       with:
-        tags: saurabheights/pip-compile:${{ matrix.tag }}_${{ matrix.python-version }}
-        path: ${{ matrix.directory }}
+        tags: saurabheights/pip-compile:${{ matrix.python-version }}-${{ matrix.tag }}
+        context: ./${{ matrix.directory }}
         build_args: TAG=${{ matrix.python-version }}-${{ matrix.tag }}
         labels: org.opencontainers.image.authors=khandujasaurabh@gmail.com,org.opencontainers.image.vendor=Saurabh Khanduja,org.opencontainers.image.licenses=Apache-2.0
         push: True
