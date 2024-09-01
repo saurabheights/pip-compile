@@ -3,7 +3,7 @@
 
 This work is forked from midnighter.
 
-[![Docker image CI](https://github.com/saurabheights/pip-compile/workflows/Docker%20Image%20CI/badge.svg)](https://github.com/saurabheights/pip-compile/actions)
+[![Docker image CI](https://github.com/saurabheights/pip-compile/actions/workflows/docker-image.yml/badge.svg)](https://github.com/saurabheights/pip-compile/actions)
 [![Docker image pulls](https://img.shields.io/docker/pulls/saurabheights/pip-compile)](https://hub.docker.com/r/saurabheights/pip-compile)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blueviolet)](https://opensource.org/licenses/Apache-2.0)
 
