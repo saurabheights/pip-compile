@@ -22,7 +22,7 @@ WORKDIR /opt/requirements
 
 RUN set -eux \
     && apt-get update \
-    && apt-get install --yes --only-upgrade openssl ca-certificates \
+    && apt-get install --yes --only-upgrade openssl ca-certificates gcc build-essential \
     && pip install --upgrade pip setuptools wheel pip-tools \
     && rm -rf /root/.cache/pip \
     && apt-get clean \

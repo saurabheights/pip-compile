@@ -28,6 +28,8 @@ RUN set -eux \
         openssl-dev \
         postgresql-dev \
         yaml-dev \
+        gcc \
+        build-essential \
     && pip install --upgrade pip setuptools wheel pip-tools \
     && rm -rf /root/.cache/pip
 
