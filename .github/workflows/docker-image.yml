@@ -1,4 +1,4 @@
-name: Docker Image CI - build and push pip-compile images for various python versions.
+name: Docker Image CI.
 
 on:
   push:
