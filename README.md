@@ -32,10 +32,23 @@ Images are generated for the following environments. Please [open an
 issue](https://github.com/saurabheights/pip-compile/issues/new) if you require
 others.
 
-| Tag | Python | Distribution |
-| --- | ------ | ------------ |
-| 3.8-alpine | 3.8 | [Alpine Linux 3.12](https://www.alpinelinux.org/) |
-| 3.8-slim-buster | 3.8 | [Debian Buster](https://www.debian.org/) |
+| Tag             | Python | Distribution                                      |
+|-----------------|--------|---------------------------------------------------|
+| 3.8-alpine      |  3.8  | [Alpine Linux 3.12](https://www.alpinelinux.org/) |
+| 3.8-bullseye    |  3.8  |                                                   |
+| 3.8-bookworm    |  3.8  |                                                   |
+| 3.9-alpine      |  3.9  |                                                   |
+| 3.9-bullseye    |  3.9  |                                                   |
+| 3.9-bookworm    |  3.9  |                                                   |
+| 3.10-alpine     |  3.10 |                                                   |
+| 3.10-bullseye   |  3.10 |                                                   |
+| 3.10-bookworm   |  3.10 |                                                   |
+| 3.11-alpine     |  3.11 |                                                   |
+| 3.11-bullseye   |  3.11 |                                                   |
+| 3.11-bookworm   |  3.11 |                                                   |
+| 3.12-alpine     |  3.12 |                                                   |
+| 3.12-bullseye   |  3.12 |                                                   |
+| 3.12-bookworm   |  3.12 |                                                   |
 
 ## Copyright
 
